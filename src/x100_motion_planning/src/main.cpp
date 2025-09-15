@@ -38,11 +38,13 @@ int main(int argc, char** argv)
     //                         └── wrist_yaw_link
 
 
-
+    // 设置速度/加速度缩放因子
+    planner.moveGroup()->setMaxVelocityScalingFactor(0.5);
+    planner.moveGroup()->setMaxAccelerationScalingFactor(0.5);
     ////////////笛卡尔空间规划///////////
     geometry_msgs::msg::PoseStamped pose;
     // NOTE: 根据你的机器人调整 frame_id，例如 "base_link" 或 各臂对应的 link
-    pose.header.frame_id = "base_link";
+    pose.header.frame_id = "base_link"; 
     pose.pose.position.x = 0.19;
     pose.pose.position.y = 0.21;
     pose.pose.position.z = 0.70;
@@ -55,14 +57,15 @@ int main(int argc, char** argv)
     planner.visualTools()->trigger();
     planner.visualTools()->prompt("Press 'next' in the RvizVisualToolsGui window to start the demo");
 
-    auto pose_plan = planner.planPoseGoal(move_group, "left_wrist_yaw_link", pose);
+    auto pose_plan = planner.planPoseGoal(pose);
     planner.visualTools()->prompt("Press 'next' to execute pose plan");
     planner.executePlan(pose_plan);
     planner.visualTools()->prompt("Press 'next' to plan a joint-space goal");
 
 
     ////////////关节空间规划///////////
-    std::vector<std::vector<double>> joint_values = { { 0.08, 0.06, -0.087, -0.94, 0.08, -0.50, -0.034 }, { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 } };
+    std::vector<std::vector<double>> joint_values = { { 0.2, 0.1, -0.087, -1.3, 0.38, -0.50, -0.334 }, 
+                                                        { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 } };
     auto joint_plan = planner.planJointGoal(joint_values);
     
     planner.visualTools()->prompt("Press 'next' to execute joint plan");

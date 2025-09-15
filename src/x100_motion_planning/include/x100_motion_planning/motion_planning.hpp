@@ -22,17 +22,18 @@ public:
   bool initialize();
 
   // 笛卡尔/姿态目标规划
-  moveit::planning_interface::MoveGroupInterface::Plan planPoseGoal(std::string planning_group,
-                                                                    std::string ee_link,
-                                                                    const geometry_msgs::msg::PoseStamped& pose);
+  moveit::planning_interface::MoveGroupInterface::Plan planPoseGoal(const geometry_msgs::msg::PoseStamped& pose,
+                                                                    std::string ee_link = "");
   // 多关节路点顺序规划并合并（带时间参数化）
   moveit::planning_interface::MoveGroupInterface::Plan planJointGoal(const std::vector<std::vector<double>>& way_points,
-                                                                     const std::string& ee_link = "");
+                                                                     std::string ee_link = "");
 
   bool executePlan(const moveit::planning_interface::MoveGroupInterface::Plan& plan);
-
+ 
   // 可视化工具访问
   moveit_visual_tools::MoveItVisualTools* visualTools();
+  // 访问内部 MoveGroupInterface
+  moveit::planning_interface::MoveGroupInterface* moveGroup();
 
 private:
   rclcpp::Node::SharedPtr node_;
