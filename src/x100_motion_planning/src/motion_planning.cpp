@@ -67,7 +67,7 @@ bool MotionPlanning::initialize()
   visual_tools_->deleteAllMarkers();  
   visual_tools_->loadRemoteControl();
   visual_tools_->trigger();
-  // 初始化显示规划轨迹的发布器 (DisplayTrajectory)
+
   if (!display_publisher_)
     display_publisher_ = node_->create_publisher<moveit_msgs::msg::DisplayTrajectory>("display_planned_path", 10);
   return true;
