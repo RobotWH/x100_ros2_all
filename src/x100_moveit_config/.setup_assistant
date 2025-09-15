@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: x100_description
+    relative_path: urdf/x100_with_rohand_lites.urdf
+  srdf:
+    relative_path: config/x100_with_rohand_lites.srdf
+  package_settings:
+    author_name: yjh
+    author_email: yjh@yjh.com
+    generated_timestamp: 1757489604
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
