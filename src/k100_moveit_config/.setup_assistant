@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: k100_description
+    relative_path: urdf/k100.urdf
+  srdf:
+    relative_path: config/k100.srdf
+  package_settings:
+    author_name: yjh
+    author_email: wanghao@yjh.com
+    generated_timestamp: 1758352367
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
